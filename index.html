@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TE AMO.</title>
+    <link rel="stylesheet" href="luisa.css">
+    <style>
+        .mobile {
+            display: none;
+        }
+        .gallery {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .gallery-image {
+            object-fit: cover;
+            margin: 10px;
+            height: 300px;
+            width: 300px;
+            max-width: 100%;
+        }
+        #finalText {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="mobile">
+            <p>ABRE NO PC GURIA TEIMOSA</p>
+        </div>
+        <div class="content">
+            <p id="dynamicText">E ai cara</p>
+       
+            <button id="textChanger" onclick="changeText()">></button>
+            <button id="showGalleryButton" style="display:none;" onclick="showGallery()">></button>
+        </div>
+        <div class="gallery" id="gallery">
+            
+        </div>
+        <div id="finalText">Enfim cara, FELIZ ANO NOVO te amo muito, espero que esse ano seja melhor ainda do que o passado.</div>
+    </div>
+    <audio id="backgroundMusic" src="maresia.mp3" loop></audio>
+</body>
+
+<script>
+    var texts = [
+        "E ai cara",
+        "Não queria te desejar um feliz ano novo de forma normal, então decidi fazer isso aqui, espero que goste.",
+        "Ano passado foi um ano muito bom pra ti, acredito eu, gostaria de estar mais presente em algumas coisas, mas as nossas vidas mudaram completamente, tanto a minha quanto a tua, e com certeza, a tua mudou para melhor, vejo tua evolução a cada dia que conversamos, que nos vemos, sinto que tu virou uma pessoa diferente e muito melhor.",
+        "Sinto muita falta dos bons momentos que passavamos juntos, na casa da tua mãe por exemplo, sentados fumando um cigarro, tomando uma cerveja e conversando, eram bons momentos, momentos que me faziam sentir estar vivo, não somente seguindo uma rotina programada como esse código aqui.",
+        "Ou por exemplo, quando a gente estava aqui em casa, não lembro o que aconteceu na patinha da Susi, mas ela parecia estar com dor, quando desceu comigo esqueceu de fingir que tava com dor e quando falei com ela, logo ela voltou a mancar kkkkkkk",
+        "Enfim, foram bons momentos...",
+        "Quero que saiba, que tenho muito orgulho de ti, sempre acreditei no que tu poderia ser capaz e tudo o que tu ainda pode ser, quero te ver voar, não só no ano que vai vir, mas para sempre.",
+        "Tu tem um lugar especial no meu coração, posso não ser mais a mesma pessoa para ti, entendo muito bem o teu lado e o porque as cosias ficaram do jeito que estão. Levo como aprendizado tudo que vivi contigo, e espero me tornar alguém melhor também.",
+        "Agora por favor, ligue o SOM MULHER!"
+    ];
+    var currentIndex = 0;
+    
+    var dynamicText = document.getElementById('dynamicText');
+    var galleryButton = document.getElementById('showGalleryButton');
+    var textButton = document.getElementById('textChanger');
+    var galleryDiv = document.getElementById('gallery');
+    var backgroundMusic = document.getElementById('backgroundMusic');
+    var finalText =  document.getElementById("finalText");
+    function updateDynamicText() {
+        dynamicText.textContent = texts[currentIndex];
+        if (currentIndex === texts.length - 1) {
+          
+            galleryButton.style.display = 'block';
+            textButton.style.display = 'none';
+        }
+    }
+
+  
+    function changeText() {
+        currentIndex = (currentIndex + 1) % texts.length;
+        updateDynamicText();
+    }
+
+ 
+    function showGallery() {
+     
+        document.querySelector('.content').style.display = 'none';
+   
+        galleryDiv.style.display = 'flex';
+        
+        for (var i = 1; i <= 30; i++) {
+            var imagePath = 'images/' + i + '.jpg';
+            var imageElement = document.createElement('img');
+            imageElement.classList.add('gallery-image');
+            imageElement.src = imagePath;
+            galleryDiv.appendChild(imageElement);
+        }
+        backgroundMusic.play();
+        finalText.style.display = "block"
+    }
+</script>
+
+</html>
